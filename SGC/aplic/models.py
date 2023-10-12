@@ -10,6 +10,7 @@ class Cliente(models.Model):
 
 class Telefone(models.Model):
     numero = models.CharField(max_length=20, verbose_name="Digite seu telefone")
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, default=0)
 
 class Endereco(models.Model):
    logradouro = models.CharField(max_length=50, verbose_name="Digite seu logradouro")
@@ -19,4 +20,6 @@ class Endereco(models.Model):
    estado = models.CharField(max_length=50, verbose_name="Digite seu estado")
    pais = models.CharField(max_length=50, verbose_name="Digite seu país")
    cep = models.CharField(max_length=8, verbose_name="Digite o CEP")
+   cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, default=0)
+
 
