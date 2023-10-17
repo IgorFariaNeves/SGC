@@ -1,17 +1,38 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Contabilidade Teste</title>
+    <title>Sistema de Contabilidade - Página Inicial</title>
+    <!-- Adicione o link para o Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .jumbotron {
+            background-color: #000000;
+            color: #fff;
+        }
+    </style>
 </head>
-
 <body>
-
-<h1>Titulo Teste Sistema</h1>
-
-    <h3><a href="http://127.0.0.1:8000/admin">Clique aqui</a></h3>
-
+    <div class="container mt-5">
+        <div class="jumbotron text-center">
+            <h1 class="display-4">Sistema de Contabilidade</h1>
+            <p class="lead">Um sistema de gerenciamento para escritórios de contabilidade</p>
+            <hr class="my-4">
+            <p>Desenvolvido para a disciplina de Aplicações Web</p>
+            <p>Integrantes: Daniel Vitor Duarte e Igor Faria Neves</p>
+            <p>Curso: Sistemas De Informação</p>
+            <p>Disciplina: Desenvolvimento de Aplicações para Web</p>
+            <p>Faculdade: Faculdade Metodista Granbery</p>
+            <a class="btn btn-primary btn-lg" href="/admin" role="button">Acessar Área Administrativa</a>
+        </div>
+    </div>
+    <!-- Adicione os scripts do Bootstrap e jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
