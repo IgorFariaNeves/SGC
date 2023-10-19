@@ -13,7 +13,6 @@ class Cliente(models.Model):
 
 class PessoaFisica(Cliente):
     cpf = models.CharField(max_length=11, verbose_name="CPF")
-    cliente_ptr = models.OneToOneField(Cliente, on_delete=models.CASCADE, parent_link=True, primary_key=True, default=None)
 
     def __str__(self):
         return self.nome
@@ -33,7 +32,8 @@ class Proprietario(models.Model):
 class PessoaJuridica(Cliente):
     cnpj = models.CharField(max_length=14, verbose_name="CNPJ")
     razao_social = models.CharField(max_length=50, verbose_name="Razão Social")
-    cliente_ptr = models.OneToOneField(Cliente, on_delete=models.CASCADE, parent_link=True, primary_key=True, default=None)
+    proprietario = models.ForeignKey(Proprietario, on_delete=models.CASCADE, null=True, blank=True)
+
 
     def __str__(self):
         return self.nome
@@ -53,6 +53,8 @@ class NotaFiscal(models.Model):
     data = models.DateField(verbose_name="Data da Nota Fiscal")
     valor = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Valor da Nota Fiscal")
     tipo = models.CharField(max_length=20, choices=TIPO_CHOICES, verbose_name="Tipo de Nota Fiscal")
+    pessoajuridica = models.ForeignKey(PessoaJuridica, on_delete=models.CASCADE, null=True, blank=True)
+
 
     def __str__(self):
         return f"Nota Fiscal - {self.numero}"
@@ -65,7 +67,6 @@ class Funcionario(models.Model):
    nome = models.CharField(max_length=50, verbose_name="Nome")
    cpf = models.CharField(max_length=11, verbose_name="CPF")
    data_nascimento = models.DateField(verbose_name="Data de Nascimento", null=True)
-   contato = models.CharField(max_length=50, verbose_name="Telefone")
    salario = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Salário")
    cargo = models.CharField(max_length=50, verbose_name="Cargo")
    horario_entrada = models.TimeField(verbose_name="Horário de Entrada", help_text='HH:MM', null=True)
