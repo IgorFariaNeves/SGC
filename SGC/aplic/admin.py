@@ -17,7 +17,6 @@ class ClienteAdmin(admin.ModelAdmin):
 class FuncionarioAdmin(admin.ModelAdmin):
     inlines = [TelefoneInline, EnderecoInline]
 
-# Agora você pode continuar com os seus registros existentes:
 admin.site.register(ContraCheque)
 admin.site.register(Verbas)
 admin.site.register(PessoaFisica)

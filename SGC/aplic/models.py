@@ -72,6 +72,8 @@ class Funcionario(models.Model):
    horario_entrada = models.TimeField(verbose_name="Horário de Entrada", help_text='HH:MM', null=True)
    horario_saida = models.TimeField(verbose_name="Horário de Saída", help_text='HH:MM', null=True)
    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+   foto = models.ImageField(upload_to="get_file_path", null=True, blank=True, verbose_name='Foto')
+
 
    def __str__(self):
        return self.nome
