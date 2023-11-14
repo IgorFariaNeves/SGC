@@ -1,4 +1,13 @@
 from django.db import models
+from stdimage.models import StdImageField
+import uuid
+from django.utils.translation import gettext_lazy as _
+
+
+def get_file_path(_instance, filename):
+    ext = filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+    return filename
 
 class Cliente(models.Model):
     nome = models.CharField(max_length=50, verbose_name="Nome")
@@ -72,7 +81,7 @@ class Funcionario(models.Model):
    horario_entrada = models.TimeField(verbose_name="Horário de Entrada", help_text='HH:MM', null=True)
    horario_saida = models.TimeField(verbose_name="Horário de Saída", help_text='HH:MM', null=True)
    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-   foto = models.ImageField(upload_to="get_file_path", null=True, blank=True, verbose_name='Foto')
+   foto = StdImageField(_('Foto'), null=True, blank=True, upload_to=get_file_path, variations={'thumb': {'width': 480, 'height': 480, 'crop': True}})
 
 
    def __str__(self):

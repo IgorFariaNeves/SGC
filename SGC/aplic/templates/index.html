@@ -53,7 +53,7 @@
             <div class="funcionario-list" id="funcionarioList">
                 {% for funcionario in funcionarios %}
                     <div class="funcionario-card">
-                        <img class="funcionario-img" src="{{ funcionario.foto }}" alt="Foto de {{ funcionario.nome }}">
+                        <img src="{{ funcionario.imagem.thumb.url }}" alt="{{ funcionario.nome }}"  alt="#">
                         <h4>{{ funcionario.nome }}</h4>
                     </div>
                 {% endfor %}
