@@ -1,0 +1,46 @@
+{% load static %}
+    <!-- Start funcionarios Area -->
+    <section class="funcionarios section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <div class="section-icon wow zoomIn" data-wow-delay=".4s">
+                            <i class="lni lni-graduation"></i>
+                        </div>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Funcionários</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">Aqui estão listados os funcionários</p>
+                    </div>
+                </div>
+            </div>
+            <div class="single-head">
+                <div class="row">
+                    {% for funcionario in funcionarios %}
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <!-- Start Single Course -->
+                            <div class="single-course wow fadeInUp" data-wow-delay=".2s">
+                                <div class="course-image">
+                                    <a href="{% url 'funcionario-detalhe' id=funcionario.id %}"><img src="{{ funcionario.imagem.thumb.url }}" alt="{{ funcionario.nome }}"  alt="#"></a>
+                                </div>
+                                <div class="content">
+                                    <h3><a href="{% url 'funcionario-detalhe' id=funcionario.id %}">{{ funcionario.nome }}</a></h3>
+                                    <p>
+                                        Salario = R$ {{ funcionario.salario }}
+                                    </p>
+                                </div>
+                                <div class="bottom-content">
+                                    <span class="tag">
+                                        Horario de Entrada: {{ funcionario.horario_entrada }} h
+                                        <br>
+                                        Horario de Saída: {{ funcionario.horario_saida }} h
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- End Single funcionario -->
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End funcionarios Area -->
