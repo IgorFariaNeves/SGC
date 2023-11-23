@@ -69,21 +69,21 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        function filterFuncionarios() {
-            var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById('searchInput');
-            filter = input.value.toUpperCase();
-            div = document.getElementById('funcionarioList');
-            cards = div.getElementsByClassName('funcionario-card');
-            for (i = 0; i < cards.length; i++) {
-                txtValue = cards[i].textContent || cards[i].innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    cards[i].style.display = '';
-                } else {
-                    cards[i].style.display = 'none';
+            function filterFuncionarios() {
+                var input, filter, ul, li, a, i, txtValue;
+                input = document.getElementById('searchInput');
+                filter = input.value.toUpperCase();
+                div = document.getElementById('funcionarioList');
+                cards = div.getElementsByClassName('funcionario-card');
+                for (i = 0; i < cards.length; i++) {
+                    txtValue = cards[i].textContent || cards[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        cards[i].style.display = '';
+                    } else {
+                        cards[i].style.display = 'none';
+                    }
                 }
             }
-        }
     </script>
 
         <!-- funcionarios start -->

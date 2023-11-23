@@ -1,15 +1,13 @@
 from django.shortcuts import render
-from .models import Funcionario
-from django.views.generic import TemplateView
 from django.views.generic import ListView
+from .models import Funcionario
 
-class IndexView(TemplateView):
+class IndexView(ListView):
     template_name = 'index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        context['funcionarios'] = Funcionario.objects.all()
-        return context
+    model = Funcionario
+    context_object_name = 'funcionarios'
+    paginate_by = 5
+    ordering = 'nome'
 
 def home(request):
     query = request.GET.get('q')
@@ -21,17 +19,17 @@ def home(request):
     return render(request, 'index.html', {'funcionarios': funcionarios})
 
 class FuncionarioDetalheView(ListView):
-    template_name = 'funcionario-detail.html'
+    template_name = 'funcionario-detalhe.html'
+    model = Funcionario
+    context_object_name = 'funcionario'
     paginate_by = 5
     ordering = 'nome'
-    model = Funcionario
-
-    def get_context_data(self, **kwargs):
-        context = super(FuncionarioDetalheView, self).get_context_data(**kwargs)
-        id = self.kwargs['id']
-        context['funcionario'] = Funcionario.objects.filter(id=id).first
-        return context
 
     def get_queryset(self, **kwargs):
         id = self.kwargs['id']
-        return Funcionario.objects.filter(funcionario_id=id)
+        return Funcionario.objects.filter(id=id)
+
+
+def detalhes_funcionario(request, funcionario_id):
+    funcionario = Funcionario.objects.get(id=funcionario_id)
+    return render(request, 'funcionario-detalhe.html', {'funcionario': funcionario})

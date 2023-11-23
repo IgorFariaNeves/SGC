@@ -1,0 +1,40 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Seu Título Aqui</title>
+    <meta name="description" content="Sua descrição aqui">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.svg' %}">
+    <!-- Adicione seus arquivos de estilo aqui -->
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+</head>
+
+<body>
+    <!-- Conteúdo da página -->
+    <header>
+        <!-- Seu cabeçalho aqui -->
+    </header>
+
+    <nav>
+        <!-- Seu menu de navegação aqui -->
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <!-- Seu rodapé aqui -->
+    </footer>
+
+    <!-- Adicione seus scripts JavaScript aqui -->
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
