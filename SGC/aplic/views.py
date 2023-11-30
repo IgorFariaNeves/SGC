@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 from .models import Funcionario
+from .forms import FuncionarioSearchForm
+from typing import Any
 
 class IndexView(ListView):
     template_name = 'index.html'
@@ -9,14 +11,28 @@ class IndexView(ListView):
     paginate_by = 5
     ordering = 'nome'
 
+    def get_context_data(self, **kwargs: Any):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['form'] = FuncionarioSearchForm(self.request.GET)
+        return context
+
+    def get_queryset(self):
+        queryset = Funcionario.objects.all()
+        nome = self.request.GET.get('nome')
+        if nome:
+            queryset = queryset.filter(nome__icontains=nome)
+        return queryset
+
 def home(request):
-    query = request.GET.get('q')
+    form = FuncionarioSearchForm(request.GET)
     funcionarios = Funcionario.objects.all()
 
-    if query:
-        funcionarios = funcionarios.filter(nome__icontains=query)
+    if form.is_valid():
+        nome = form.cleaned_data.get('nome')
+        if nome:
+            funcionarios = funcionarios.filter(nome__icontains=nome)
 
-    return render(request, 'index.html', {'funcionarios': funcionarios})
+    return render(request, 'index.html', {'funcionarios': funcionarios, 'form': form})
 
 class FuncionarioDetalheView(ListView):
     template_name = 'funcionario-detalhe.html'
@@ -25,10 +41,11 @@ class FuncionarioDetalheView(ListView):
     paginate_by = 5
     ordering = 'nome'
 
-    def get_queryset(self, **kwargs):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         id = self.kwargs['id']
-        return Funcionario.objects.filter(id=id)
-
+        context['funcionario'] = Funcionario.objects.get(id=id)
+        return context
 
 def detalhes_funcionario(request, funcionario_id):
     funcionario = Funcionario.objects.get(id=funcionario_id)

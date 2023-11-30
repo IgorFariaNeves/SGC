@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,23 +10,28 @@
         body {
             background-color: #f8f9fa;
         }
+
         .jumbotron {
             background-color: #293241;
             color: #fff;
             padding: 2rem;
             border-radius: 0.3rem;
         }
+
         .funcionario-list {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 2rem;
         }
+
         .funcionario-card {
             width: 200px;
             margin: 1rem;
             text-align: center;
+            cursor: pointer; /* Adiciona estilo de cursor ao passar sobre o card */
         }
+
         .funcionario-img {
             width: 150px;
             height: 150px;
@@ -35,6 +41,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container mt-5">
@@ -46,14 +53,17 @@
             <p>Integrantes: Daniel Vitor Duarte e Igor Faria Neves</p>
             <p>Curso: Sistemas De Informação</p>
 
-            <div class="form-group">
-                <input type="text" class="form-control" id="searchInput" onkeyup="filterFuncionarios()" placeholder="Buscar funcionários">
-            </div>
+            <form class="form-inline mb-3" method="get" action="{% url 'home' %}">
+                {% csrf_token %}
+                {{ form.nome.label_tag }}
+                {{ form.nome }}
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
 
             <div class="funcionario-list" id="funcionarioList">
                 {% for funcionario in funcionarios %}
-                    <div class="funcionario-card">
-                        <img src="{{ funcionario.imagem.thumb.url }}" alt="{{ funcionario.nome }}"  alt="#">
+                    <div class="funcionario-card" onclick="window.location='{% url 'detalhes_funcionario' funcionario.id %}'">
+                        <img src="{{ funcionario.foto.thumb.url }}" alt="{{ funcionario.nome }}" alt="#">
                         <h4>{{ funcionario.nome }}</h4>
                     </div>
                 {% endfor %}
@@ -64,31 +74,10 @@
             <a class="btn btn-primary btn-lg" href="/admin" role="button">Acessar Área Administrativa</a>
         </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-            function filterFuncionarios() {
-                var input, filter, ul, li, a, i, txtValue;
-                input = document.getElementById('searchInput');
-                filter = input.value.toUpperCase();
-                div = document.getElementById('funcionarioList');
-                cards = div.getElementsByClassName('funcionario-card');
-                for (i = 0; i < cards.length; i++) {
-                    txtValue = cards[i].textContent || cards[i].innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        cards[i].style.display = '';
-                    } else {
-                        cards[i].style.display = 'none';
-                    }
-                }
-            }
-    </script>
-
-        <!-- funcionarios start -->
-    {% include 'funcionarios-area.html' %}
-    <!-- funcionarios Section End -->
-
 </body>
+
 </html>
