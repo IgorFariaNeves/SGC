@@ -21,7 +21,7 @@
                             <!-- Start Single Course -->
                             <div class="single-course wow fadeInUp" data-wow-delay=".2s">
                                 <div class="course-image">
-                                    <a href="{% url 'funcionario-detalhe' id=funcionario.id %}"><img src="{{ funcionario.imagem.thumb.url }}" alt="{{ funcionario.nome }}"  alt="#"></a>
+                                    <a href="{% url 'funcionario-detalhe' id=funcionario.id %}"><img src="{{ funcionario.get_foto_url }}" alt="{{ funcionario.nome }}" class="funcionario-img"></a>
                                 </div>
                                 <div class="content">
                                     <h3><a href="{% url 'funcionario-detalhe' id=funcionario.id %}">{{ funcionario.nome }}</a></h3>

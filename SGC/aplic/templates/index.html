@@ -63,7 +63,7 @@
             <div class="funcionario-list" id="funcionarioList">
                 {% for funcionario in funcionarios %}
                     <div class="funcionario-card" onclick="window.location='{% url 'detalhes_funcionario' funcionario.id %}'">
-                        <img src="{{ funcionario.foto.thumb.url }}" alt="{{ funcionario.nome }}" alt="#">
+                        <img src="{{ funcionario.foto.thumb.url }}" alt="{{ funcionario.nome }}" class="w-100">
                         <h4>{{ funcionario.nome }}</h4>
                     </div>
                 {% endfor %}

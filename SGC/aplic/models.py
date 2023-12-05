@@ -3,7 +3,6 @@ from stdimage.models import StdImageField
 import uuid
 from django.utils.translation import gettext_lazy as _
 
-
 def get_file_path(_instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
@@ -73,21 +72,20 @@ class NotaFiscal(models.Model):
         verbose_name_plural = "Notas Fiscais"
 
 class Funcionario(models.Model):
-   nome = models.CharField(max_length=50, verbose_name="Nome")
-   cpf = models.CharField(max_length=11, verbose_name="CPF")
-   data_nascimento = models.DateField(verbose_name="Data de Nascimento", null=True)
-   salario = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Salário")
-   cargo = models.CharField(max_length=50, verbose_name="Cargo")
-   horario_entrada = models.TimeField(verbose_name="Horário de Entrada", help_text='HH:MM', null=True)
-   horario_saida = models.TimeField(verbose_name="Horário de Saída", help_text='HH:MM', null=True)
-   cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-   foto = StdImageField(_('Foto'), null=True, blank=True, upload_to=get_file_path, variations={'thumb': {'width': 480, 'height': 480, 'crop': True}})
+    nome = models.CharField(max_length=50, verbose_name="Nome")
+    cpf = models.CharField(max_length=11, verbose_name="CPF")
+    data_nascimento = models.DateField(verbose_name="Data de Nascimento", null=True)
+    salario = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Salário")
+    cargo = models.CharField(max_length=50, verbose_name="Cargo")
+    horario_entrada = models.TimeField(verbose_name="Horário de Entrada", help_text='HH:MM', null=True)
+    horario_saida = models.TimeField(verbose_name="Horário de Saída", help_text='HH:MM', null=True)
+    cliente = models.ForeignKey('Cliente', on_delete=models.CASCADE)
+    foto = StdImageField(_('Foto'), null=True, blank=True, upload_to=get_file_path, variations={'thumb': {'width': 480, 'height': 480, 'crop': True}})
 
+    def __str__(self):
+        return self.nome
 
-   def __str__(self):
-       return self.nome
-
-   class Meta:
+    class Meta:
         verbose_name = "Funcionário"
         verbose_name_plural = "Funcionários"
 
