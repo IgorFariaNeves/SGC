@@ -1,4 +1,7 @@
+{% load static %}
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -6,40 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Contabilidade - Página Inicial</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
-        .jumbotron {
-            background-color: #293241;
-            color: #fff;
-            padding: 2rem;
-            border-radius: 0.3rem;
-        }
-
-        .funcionario-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-
-        .funcionario-card {
-            width: 200px;
-            margin: 1rem;
-            text-align: center;
-            cursor: pointer; /* Adiciona estilo de cursor ao passar sobre o card */
-        }
-
-        .funcionario-img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 0.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
 </head>
 
 <body>
@@ -53,7 +23,7 @@
             <p>Integrantes: Daniel Vitor Duarte e Igor Faria Neves</p>
             <p>Curso: Sistemas De Informação</p>
 
-            <form class="form-inline mb-3" method="get" action="{% url 'home' %}">
+            <form class="form-inline mb-3 mx-auto" method="get" action="{% url 'home' %}">
                 {% csrf_token %}
                 {{ form.nome.label_tag }}
                 {{ form.nome }}
@@ -63,7 +33,7 @@
             <div class="funcionario-list" id="funcionarioList">
                 {% for funcionario in funcionarios %}
                     <div class="funcionario-card" onclick="window.location='{% url 'detalhes_funcionario' funcionario.id %}'">
-                        <img src="{{ funcionario.foto.thumb.url }}" alt="{{ funcionario.nome }}" class="w-100">
+                        <img src="{{ funcionario.foto.url }}" alt="{{ funcionario.nome }}" class="funcionario-img">
                         <h4>{{ funcionario.nome }}</h4>
                     </div>
                 {% endfor %}

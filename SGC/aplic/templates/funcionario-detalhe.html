@@ -2,72 +2,77 @@
 {% load static %}
 {% block content %}
 
-    <!-- Start Breadcrumbs -->
-    <div class="breadcrumbs overlay">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8 offset-lg-2 col-md-12 col-12">
-                    <div class="breadcrumbs-content">
-                        {% if funcionario %}
-                            <h1 class="page-title">{{ funcionario.nome }}</h1>
-                            <p>{{ funcionario.cargo }}</p>
-                        {% else %}
-                            <h1 class="page-title">Funcionário não encontrado</h1>
-                        {% endif %}
-                    </div>
-                    <ul class="breadcrumb-nav">
-                        <li><a href="{% url 'index' %}">Home</a></li>
-                        <li>funcionario</li>
-                    </ul>
+<!-- Start Breadcrumbs -->
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 offset-lg-2 col-md-12 col-12">
+                <div class="breadcrumbs-content">
+                    {% if funcionario %}
+                        <h1 class="page-title">{{ funcionario.nome }}</h1>
+                        <p>{{ funcionario.cargo }}</p>
+                    {% else %}
+                        <h1 class="page-title">Funcionário não encontrado</h1>
+                    {% endif %}
                 </div>
+                <ul class="breadcrumb-nav">
+                    <li><a href="{% url 'index' %}">Pagina inicial</a></li>
+                </ul>
             </div>
         </div>
     </div>
-    <!-- End Breadcrumbs -->
+</div>
+<!-- End Breadcrumbs -->
 
-    <!-- SECTION funcionario -->
-    <section id="funcionario">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title align-center gray-bg">
-                        <br/>
-                        <h2 class="wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Detalhes do Funcionário</h2>
-                    </div>
+<!-- SECTION funcionario -->
+<section id="funcionario">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title align-center gray-bg">
+                    <br/>
+                    <h2 class="wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Detalhes do Funcionário</h2>
                 </div>
             </div>
-
-            {% if funcionario %}
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nome</th>
-                            <th scope="col">CPF</th>
-                            <th scope="col">Data de Nascimento</th>
-                            <th scope="col">Salário</th>
-                            <th scope="col">Cargo</th>
-                            <!-- Adicione mais colunas conforme necessário -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ funcionario.nome }}</td>
-                            <td>{{ funcionario.cpf }}</td>
-                            <td>{{ funcionario.data_nascimento }}</td>
-                            <td>{{ funcionario.salario }}</td>
-                            <td>{{ funcionario.cargo }}</td>
-                            <!-- Adicione mais colunas conforme necessário -->
-                        </tr>
-                    </tbody>
-                </table>
-
-                <!-- Você pode adicionar mais detalhes conforme necessário -->
-
-            {% else %}
-                <p>Nenhum funcionário encontrado.</p>
-            {% endif %}
         </div>
-    </section>
-    <!-- SECTION funcionario -->
+
+        {% if funcionario %}
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <img src="{{ funcionario.foto.url }}" alt="{{ funcionario.nome }}" class="funcionario-img">
+                </div>
+                <div class="col-md-8">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">CPF</th>
+                                <th scope="col">Data de Nascimento</th>
+                                <th scope="col">Salário</th>
+                                <th scope="col">Cargo</th>
+                                <!-- Adicione mais colunas conforme necessário -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ funcionario.nome }}</td>
+                                <td>{{ funcionario.cpf }}</td>
+                                <td>{{ funcionario.data_nascimento }}</td>
+                                <td>{{ funcionario.salario }}</td>
+                                <td>{{ funcionario.cargo }}</td>
+                                <!-- Adicione mais colunas conforme necessário -->
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Você pode adicionar mais detalhes conforme necessário -->
+                </div>
+            </div>
+        {% else %}
+            <p>Nenhum funcionário encontrado.</p>
+        {% endif %}
+    </div>
+</section>
+<!-- SECTION funcionario -->
 
 {% endblock %}
