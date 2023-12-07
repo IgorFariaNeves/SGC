@@ -29,6 +29,11 @@
                 {{ form.nome.label_tag }}
                 {{ form.nome }}
                 <button type="submit" class="btn btn-primary rounded-pill">Buscar</button>
+                <div>
+                    <ul class="breadcrumb-nav">
+                        <li><a href="{% url 'index' %}">Pagina inicial</a></li>
+                    </ul>
+                </div>
             </form>
         </div>
     </header>
@@ -38,7 +43,7 @@
     </main>
 
     <footer>
-        <div class="container">
+        <div class="jumbotron text-center">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <p>Disciplina: Desenvolvimento de Aplicações para Web</p>
